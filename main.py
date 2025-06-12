@@ -9,14 +9,11 @@ from tensorflow.keras.layers import Dense, Dropout
 import json
 import random
 import pickle
-import requests
 import os
-import matplotlib as mtpl
 import dload
 
 ignore_words = ['?', '!', '.', ',', '¿', '¡', "'", '"', ':', ';', '(', ')', '[', ']', '{', '}', '|', '\\', '/', '`', '~', '*', '#', '^', '_', '=', '+', '-', '>', '<', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-# Solo clonar el repositorio si no existe
 if not os.path.exists("data_bot"):
     dload.git_clone("https://github.com/boomcrash/data_bot.git")
 
@@ -75,7 +72,6 @@ except:
     with open("Entranamiento/brain.pickle", "wb") as pickleBrain:
         pickle.dump((all_words, tags, training, output), pickleBrain)
 
-# Crear el modelo usando Keras
 model = Sequential([
     Dense(100, activation='relu', input_shape=(len(training[0]),)),
     Dense(50),
@@ -96,8 +92,7 @@ else:
 
 def response(sentence):
     if sentence == "salir":
-        print("Chao")
-        return False
+        return "Chao", False
     else:
         bucket = [0 for _ in range(len(all_words))]
         processed_sentence = nltk.word_tokenize(sentence)
@@ -117,17 +112,9 @@ def response(sentence):
                 responses = tg["responses"]
                 response = random.choice(responses)
         if max > 0.7:
-            print("Bot:", response)
-            return True
+            return response, True
         else:
-            print("Bot: No entiendo")
-            return True
-
-print("Bienvenido al bot de chat de la empresa")
-while True:
-    sentence = input("Tú: ")
-    if not response(sentence):
-        break
+            return "No entiendo", True
 
 
 
