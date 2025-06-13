@@ -15,6 +15,7 @@ import flet as ft
 import time
 import threading
 import codecs
+import re
 
 ignore_words = ['?', '!', '.', ',', '¿', '¡', "'", '"', ':', ';', '(', ')', '[', ']', '{', '}', '|', '\\', '/', '`', '~', '*', '#', '^', '_', '=', '+', '-', '>', '<', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
@@ -247,9 +248,19 @@ def main(page: ft.Page):
                     time.sleep(0.33)
                 # Obtener respuesta real del bot
                 bot_msg = get_bot_response(user_msg)
-                # Reemplazar animación por respuesta real, pero mostrando palabra por palabra
+                # Reemplazar animación por respuesta real, mostrando código con ft.Markdown
                 chat_column.controls.remove(typing_row)
-                # Crear el contenedor del mensaje del bot
+
+                # Separar texto normal y bloque de código
+                code_block = None
+                texto_normal = bot_msg
+                match = re.search(r'```(.*?)```', bot_msg, re.DOTALL)
+                if match:
+                    code_block = match.group(0)
+                    texto_normal = bot_msg.replace(code_block, '').strip()
+                    code_block = code_block.strip('`')  # Quitar las comillas invertidas
+
+                # Mostrar texto normal con efecto typing palabra por palabra
                 bot_text = ft.Text("", color="black", selectable=True)
                 bot_row = ft.Row([
                     ft.CircleAvatar(
@@ -258,7 +269,7 @@ def main(page: ft.Page):
                         radius=20,
                     ),
                     ft.Container(
-                        content=bot_text,
+                        content=ft.Column([bot_text], tight=True),
                         bgcolor="white",
                         border_radius=20,
                         padding=10,
@@ -269,8 +280,7 @@ def main(page: ft.Page):
                 ], alignment=ft.MainAxisAlignment.START, vertical_alignment=ft.CrossAxisAlignment.START)
                 chat_column.controls.append(bot_row)
                 page.update()
-                # Efecto typing palabra por palabra
-                palabras = bot_msg.split(" ")
+                palabras = texto_normal.split(" ")
                 texto_actual = ""
                 for palabra in palabras:
                     texto_actual += palabra + " "
@@ -279,6 +289,23 @@ def main(page: ft.Page):
                     time.sleep(0.12)
                 bot_text.value = texto_actual.strip()
                 page.update()
+
+                # Si hay bloque de código, mostrarlo con ft.Markdown
+                if code_block:
+                    # Extraer el lenguaje y el código
+                    code_match = re.match(r'(\w+)?\n([\s\S]*)', code_block)
+                    if code_match:
+                        lenguaje = code_match.group(1) or "typescript"
+                        codigo = code_match.group(2)
+                    else:
+                        lenguaje = "typescript"
+                        codigo = code_block
+                    markdown_code = f"```{lenguaje}\n{codigo}\n```"
+                    # Agregar el bloque de código debajo del texto
+                    bot_row.controls[1].content.controls.append(
+                        ft.Markdown(markdown_code, selectable=True, extension_set=ft.MarkdownExtensionSet.GITHUB_WEB, code_theme="atom-one-light")
+                    )
+                    page.update()
 
             threading.Thread(target=bot_typing_animation, daemon=True).start()
 
