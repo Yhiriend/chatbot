@@ -1,0 +1,60 @@
+{
+    "intents": [
+        {
+            "tag": "definicion_funcion_anonima",
+            "patterns": [
+                "que es una funcion anonima",
+                "que es una función anónima",
+                "definicion de funcion anonima",
+                "explicacion de funcion anonima"
+            ],
+            "responses": [
+                "Una función anónima es una función que no tiene un nombre propio asignado. En TypeScript, se suelen usar para operaciones de un solo uso, callbacks o cuando no es necesario reutilizar la función. Se pueden definir usando la palabra clave 'function' o con arrow functions."
+            ]
+        },
+        {
+            "tag": "diferencia_funcion_nombrada",
+            "patterns": [
+                "cual es la diferencia entre una funcion anonima y una funcion nombrada",
+                "diferencia entre funcion anonima y funcion nombrada",
+                "diferencias entre funcion anonima y nombrada"
+            ],
+            "responses": [
+                "La diferencia principal es que una función nombrada tiene un identificador propio y puede ser llamada por su nombre, mientras que una función anónima no tiene nombre y suele asignarse a una variable o pasarse como argumento. Las funciones nombradas permiten hoisting y son más fáciles de depurar, mientras que las anónimas son ideales para usos puntuales."
+            ]
+        },
+        {
+            "tag": "settimeout_setinterval",
+            "patterns": [
+                "es posible usar funciones anonimas en setTimeout y setInterval",
+                "puedo usar funciones anonimas en setTimeout",
+                "puedo usar funciones anonimas en setInterval"
+            ],
+            "responses": [
+                "Sí, es totalmente posible y común usar funciones anónimas en setTimeout y setInterval. Esto permite ejecutar código temporal o repetitivo sin necesidad de declarar una función aparte."
+            ]
+        },
+        {
+            "tag": "diferencia_arrow_function",
+            "patterns": [
+                "diferencia entre funciones anonimas regulares y arrow functions",
+                "diferencias entre funcion anonima y arrow function",
+                "diferencia entre funcion tradicional y arrow function"
+            ],
+            "responses": [
+                "Las funciones anónimas regulares y las arrow functions difieren principalmente en el manejo del this, la sintaxis y el uso del objeto arguments. Las arrow functions no tienen su propio this ni arguments, y su sintaxis es más concisa. Las funciones anónimas regulares pueden ser usadas como constructores, las arrow functions no."
+            ]
+        },
+        {
+            "tag": "ventajas_funcion_anonima",
+            "patterns": [
+                "cuales son las ventajas de usar funciones anonimas",
+                "ventajas de funciones anonimas",
+                "beneficios de funciones anonimas"
+            ],
+            "responses": [
+                "Las funciones anónimas permiten escribir código más conciso, facilitan el uso de callbacks, mejoran la legibilidad en operaciones de un solo uso y ayudan a mantener el scope local. Son ideales para programación funcional y manejo de eventos."
+            ]
+        }
+    ]
+} 

@@ -1,0 +1,54 @@
+{
+    "intents": [
+        {
+            "tag": "definicion_funcion_anonima",
+            "patterns": [
+                "ejemplo de funcion anonima",
+                "ejemplo de que es una funcion anonima"
+            ],
+            "responses": [
+                "```typescript\n// Función anónima asignada a una variable\nconst saludar = function(nombre: string) {\n  return `Hola, ${nombre}`;\n};\nconsole.log(saludar('Ana')); // Output: Hola, Ana\n```"
+            ]
+        },
+        {
+            "tag": "diferencia_funcion_nombrada",
+            "patterns": [
+                "ejemplo de funcion nombrada vs anonima",
+                "ejemplo diferencia funcion anonima y nombrada"
+            ],
+            "responses": [
+                "```typescript\n// Función nombrada\nfunction multiplicar(a: number, b: number): number {\n  return a * b;\n}\n\n// Función anónima\nconst dividir = function(a: number, b: number): number {\n  return a / b;\n};\n\nconsole.log(multiplicar(2, 3)); // Output: 6\nconsole.log(dividir(6, 2)); // Output: 3\n```"
+            ]
+        },
+        {
+            "tag": "settimeout_setinterval",
+            "patterns": [
+                "ejemplo de funcion anonima en setTimeout",
+                "ejemplo de funcion anonima en setInterval"
+            ],
+            "responses": [
+                "```typescript\n// Función anónima en setTimeout\nsetTimeout(function() {\n  console.log('Han pasado 2 segundos');\n}, 2000);\n\n// Función anónima en setInterval\nsetInterval(function() {\n  console.log('Mensaje repetido cada segundo');\n}, 1000);\n```"
+            ]
+        },
+        {
+            "tag": "diferencia_arrow_function",
+            "patterns": [
+                "ejemplo de arrow function",
+                "ejemplo diferencia arrow function y funcion anonima"
+            ],
+            "responses": [
+                "```typescript\n// Función anónima regular\nconst cuadrado = function(x: number): number {\n  return x * x;\n};\n\n// Arrow function\nconst cubo = (x: number): number => x * x * x;\n\nconsole.log(cuadrado(4)); // Output: 16\nconsole.log(cubo(3)); // Output: 27\n```"
+            ]
+        },
+        {
+            "tag": "ventajas_funcion_anonima",
+            "patterns": [
+                "ejemplo de ventaja de funcion anonima",
+                "ejemplo de uso de funcion anonima"
+            ],
+            "responses": [
+                "```typescript\n// Uso de función anónima como callback en un array\nconst nombres = ['Ana', 'Luis', 'Marta'];\nnombres.forEach(function(nombre) {\n  console.log('Bienvenido, ' + nombre);\n});\n// Output:\n// Bienvenido, Ana\n// Bienvenido, Luis\n// Bienvenido, Marta\n```"
+            ]
+        }
+    ]
+} 
